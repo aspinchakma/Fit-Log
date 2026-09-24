@@ -23,11 +23,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-theme="light"
       className={`${inter.variable} ${oswald.variable} h-full antialiased font-inter`}
     >
       <body className="min-h-full flex flex-col bg-black text-white">
         <Navbar />
-        <main className="flex-1 w-[95%] mx-auto lg:w-[85%] md:w-[85%] border-red-500 border-2 my-10">
+        <main className="flex-1 w-[95%] mx-auto lg:w-[85%] md:w-[85%]  my-10">
           {children}
         </main>
         <Footer />

@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar border-b border-[#1c1f26] bg-[#0f1115] py-4">
-      <div className="w-full md:w-[85%] mx-auto border-3 border-pink-700 flex items-center justify-between">
+      <div className="w-full md:w-[85%] mx-auto  flex items-center justify-between">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

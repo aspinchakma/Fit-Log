@@ -10,7 +10,7 @@ const Libraries = () => {
   }
   const { libraries } = context;
   return (
-    <div className="mt-12">
+    <div className="mt-12" id="libraries">
       <h3 className="text-4xl font-bold font-oswald">THE LIBRARY</h3>
       <p className="text-[#9CA3AF] text-lg mb-8 mt-3">
         Twelve lifts covering every major muscle group.

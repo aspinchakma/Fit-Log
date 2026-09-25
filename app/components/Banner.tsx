@@ -16,9 +16,12 @@ const Banner = () => {
           today&apos;s plan, and watch the week&apos;s work add up.
         </p>
         <div className="text-center lg:text-left md:text-left">
-          <button className="text-black bg-[#C2F800] border px-5 py-2 md:py-3 lg:py-3 border-[#C2F800] rounded-lg hover:bg-transparent hover:text-[#C2F800] transition duration-700 md:text-[14px] lg:text-[14px] font-bold cursor-pointer text-[12px]">
+          <a
+            href="#libraries"
+            className="text-black bg-[#C2F800] border px-5 py-2 md:py-3 lg:py-3 border-[#C2F800] rounded-lg hover:bg-transparent hover:text-[#C2F800] transition duration-700 md:text-[14px] lg:text-[14px] font-bold cursor-pointer text-[12px]"
+          >
             BROWSE WORKOUTS
-          </button>
+          </a>
         </div>
       </div>
       <div>

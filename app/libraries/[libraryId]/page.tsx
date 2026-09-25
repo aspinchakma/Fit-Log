@@ -1,3 +1,4 @@
+import LibraryDetailsButton from "@/app/components/LibraryDetailsButton";
 import { Library } from "@/app/context/LibraryContextProvider";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -64,46 +65,46 @@ const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
             <table className="w-full border-collapse">
               <tbody>
                 <tr className="border-b-2 border-[#20242e]">
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     EQUIPMENT
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     {equipment}
                   </td>
                 </tr>
 
                 <tr className="border-b-2 border-[#20242e]">
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     DIFFICULTY
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     {difficulty}
                   </td>
                 </tr>
 
                 <tr className="border-b-2 border-[#20242e]">
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     SETS
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     {sets}
                   </td>
                 </tr>
 
                 <tr className="border-b-2 border-[#20242e]">
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     REPS
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     {reps}
                   </td>
                 </tr>
 
                 <tr className="border-b-2 border-[#20242e]">
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     DURATION
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     <span className="inline-flex items-center gap-1">
                       {duration} min
                     </span>
@@ -111,10 +112,10 @@ const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
                 </tr>
 
                 <tr className="border-b-2 border-[#20242e]">
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     CALORIES
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     <span className="inline-flex items-center gap-1">
                       {caloriesBurned} kcal
                     </span>
@@ -122,10 +123,10 @@ const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
                 </tr>
 
                 <tr>
-                  <td className="px-5 py-4 text-sm font-bold text-[#9CA3AF]">
+                  <td className="px-4 py-3 text-sm font-bold text-[#9CA3AF]">
                     RATING
                   </td>
-                  <td className="px-5 py-4 text-sm font-medium text-right">
+                  <td className="px-4 py-3 text-sm font-medium text-right">
                     <span className="inline-flex items-center gap-1">
                       {rating}
                     </span>
@@ -136,11 +137,11 @@ const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
           </div>
 
           <div className="mt-8">
-            <h2 className="font-oswald font-bold text-2xl md:text-3xl mb-5">
+            <h2 className="font-oswald font-bold text-xl md:text-2xl mb-5">
               INSTRUCTIONS
             </h2>
 
-            <ol className="list-decimal pl-6 space-y-4 text-[#9CA3AF] leading-7">
+            <ol className="list-decimal pl-6 space-y-2 text-[#9CA3AF] leading-7">
               {instructions.map((instruction, idx) => (
                 <li key={idx} className="pl-2">
                   {instruction}
@@ -148,6 +149,7 @@ const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
               ))}
             </ol>
           </div>
+          <LibraryDetailsButton />
         </div>
       </div>
     </div>

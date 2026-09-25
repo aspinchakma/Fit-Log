@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { BsFire } from "react-icons/bs";
 import { FaRegStar } from "react-icons/fa";
 import { FiClock } from "react-icons/fi";
@@ -12,10 +13,14 @@ const LibraryCard = ({ library }: { library: Library }) => {
     muscleGroups,
     equipment,
     name,
+    id,
   } = library;
 
   return (
-    <div className="border-2 border-[#20242e] rounded-xl overflow-hidden transition duration-700 hover:-translate-y-2 cursor-pointer">
+    <Link
+      href={`/libraries/${id}`}
+      className="border-2 border-[#20242e] rounded-xl overflow-hidden transition duration-700 hover:-translate-y-2 cursor-pointer"
+    >
       <Image
         width={444}
         height={44}
@@ -54,7 +59,7 @@ const LibraryCard = ({ library }: { library: Library }) => {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

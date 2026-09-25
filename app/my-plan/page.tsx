@@ -12,6 +12,15 @@ const ListedBooks = () => {
   const context = useContext(LibraryContextAPI);
   if (!context) return <p>Context problem...</p>;
   const { plans } = context;
+  const totalPlans = plans.length;
+  const totalPlansMinutes = plans.reduce(
+    (accu, curr) => accu + curr.duration,
+    0,
+  );
+  const totalPlansCalories = plans.reduce(
+    (accu, curr) => accu + curr.caloriesBurned,
+    0,
+  );
 
   return (
     <div>
@@ -25,19 +34,19 @@ const ListedBooks = () => {
         <div>
           <h4 className="text-[#8A92A0] text-lg mb-2">Exercises</h4>
           <p className="text-[#CCFF00] text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            2
+            {activeTab === "todaysPlan" ? totalPlans : "0"}
           </p>
         </div>
         <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
           <h4 className="text-[#8A92A0] text-lg mb-2">Minutes</h4>
           <p className=" text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            23
+            {activeTab === "todaysPlan" ? totalPlansMinutes : "0"}
           </p>
         </div>
         <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
           <h4 className="text-[#8A92A0] text-lg mb-2 ">Calories</h4>
           <p className="text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            190
+            {activeTab === "todaysPlan" ? totalPlansCalories : "0"}
           </p>
         </div>
       </div>

@@ -25,6 +25,7 @@ interface ContextProps {
   plans: Library[];
   handleAddToSaved: (plan: Library) => void;
   totalSaved: Library[];
+  handleDelete: (type: string, plan: Library) => void;
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
@@ -103,6 +104,23 @@ const LibraryContextProvider = ({
       });
     }
   };
+  const handleDelete = (type: string, plan: Library): void => {
+    if (type === "saved") {
+      const final = totalSaved.filter((pln) => pln.id !== plan.id);
+      setTotalSaved(final);
+      toast.success(`Successfully Added, ${plan.name}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
   return (
     <LibraryContextAPI.Provider
       value={{
@@ -112,6 +130,7 @@ const LibraryContextProvider = ({
         plans,
         handleAddToSaved,
         totalSaved,
+        handleDelete,
       }}
     >
       {children}

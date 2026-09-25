@@ -108,7 +108,36 @@ const LibraryContextProvider = ({
     if (type === "saved") {
       const final = totalSaved.filter((pln) => pln.id !== plan.id);
       setTotalSaved(final);
-      toast.success(`Successfully Added, ${plan.name}`, {
+      toast.success(`Successfully Deleted, ${plan.name}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else if (type === "plans") {
+      const final = plans.filter((pln) => pln.id !== plan.id);
+      setPlans(final);
+      toast.success(`Successfully Deleted, ${plan.name}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else if (type === "done") {
+      const final = plans.filter((pln) => pln.id !== plan.id);
+      setPlans(final);
+      // Task completed successfully! message
+      toast.success(`Task completed successfully!`, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,

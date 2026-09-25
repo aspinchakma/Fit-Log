@@ -1,11 +1,11 @@
 import Image from "next/image";
 
 import { BsFire } from "react-icons/bs";
-import { FaCheck, FaRegStar, FaTimes } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
 import { FiClock } from "react-icons/fi";
 
-import Link from "next/link";
 import { Library } from "../context/LibraryContextProvider";
+import TotalPlansCardButtons from "./TotalPlansCardButtons";
 
 const TodaysPlanCard = ({ plan }: { plan: Library }) => {
   const { image, rating, caloriesBurned, duration, equipment, name, id } = plan;
@@ -50,24 +50,7 @@ const TodaysPlanCard = ({ plan }: { plan: Library }) => {
           </div>
         </div>
       </div>
-
-      <div className="flex w-full items-center gap-2 sm:w-auto sm:shrink-0 sm:gap-3">
-        <Link
-          href={`libraries/${id}`}
-          className="flex-1 rounded-full border border-[#374151] px-3 py-2 text-xs font-medium text-[#D1D5DB] transition-all duration-300 hover:border-[#CCFF00] hover:text-[#CCFF00] sm:flex-none sm:px-4 sm:text-sm cursor-pointer"
-        >
-          View Details
-        </Link>
-
-        <button className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[#CCFF00] bg-[#CCFF00] px-3 py-2 text-xs font-bold text-black transition-all duration-300 hover:bg-transparent hover:text-[#CCFF00] sm:flex-none sm:px-4 sm:text-sm">
-          <FaCheck size={13} />
-          <span>Mark as Done</span>
-        </button>
-
-        <button className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#6B7280] transition-all duration-300 hover:bg-[#1F2937] hover:text-red-400 cursor-pointer">
-          <FaTimes size={18} />
-        </button>
-      </div>
+      <TotalPlansCardButtons plan={plan} />
     </div>
   );
 };

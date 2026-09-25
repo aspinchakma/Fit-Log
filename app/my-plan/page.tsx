@@ -41,7 +41,7 @@ const ListedBooks = () => {
       <p className="text-[#8A92A0] text-[17px] mb-6 mt-3">
         Cap of five lifts for today. Finish them, then load more.
       </p>
-      <div className="border-2 border-[#232732] rounded-xl p-4 lg:p-6 md:p-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-4 bg-[#13161d] ">
+      <div className="border-2 border-[#232732] rounded-xl p-4 lg:p-6 md:p-6 grid grid-cols-3 lg:grid-cols-3 md:grid-cols-3 gap-4 bg-[#13161d] ">
         <div>
           <h4 className="text-[#8A92A0] text-lg mb-2">Exercises</h4>
           <p className="text-[#CCFF00] text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">

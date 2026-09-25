@@ -15,7 +15,7 @@ const LibraryCard = ({ library }: { library: Library }) => {
   } = library;
 
   return (
-    <div className="border-2 border-[#20242e] rounded-xl overflow-hidden">
+    <div className="border-2 border-[#20242e] rounded-xl overflow-hidden transition duration-700 hover:-translate-y-2 cursor-pointer">
       <Image
         width={444}
         height={44}

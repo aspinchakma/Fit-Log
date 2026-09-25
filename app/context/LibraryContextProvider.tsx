@@ -19,18 +19,19 @@ export interface Library {
 }
 
 interface ContextProps {
-  name: string;
   libraries: Library[];
   handleAddPlans: (plan: Library) => void;
   plans: Library[];
   handleAddToSaved: (plan: Library) => void;
   totalSaved: Library[];
   handleDelete: (type: string, plan: Library) => void;
+  handleSort: (sort: "duration" | "calories" | "rating") => void;
+  sortedSaved: Library[];
+  sortedPlans: Library[];
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
 );
-const name = "Aspin Chakma";
 
 const LibraryContextProvider = ({
   children,
@@ -41,6 +42,9 @@ const LibraryContextProvider = ({
 }) => {
   const [plans, setPlans] = useState<Library[]>([]);
   const [totalSaved, setTotalSaved] = useState<Library[]>([]);
+  const [sortMethod, setSortMethod] = useState<
+    "duration" | "calories" | "rating"
+  >("duration");
 
   // handle add plans
   const handleAddPlans = (plan: Library): void => {
@@ -150,16 +154,40 @@ const LibraryContextProvider = ({
       });
     }
   };
+
+  // short
+  const handleSort = (sort: "duration" | "calories" | "rating") => {
+    setSortMethod(sort);
+  };
+
+  const sortPlansAndSaved = (plans: Library[]) => {
+    const sortPlansOrSaved = [...plans];
+    if (sortMethod === "duration") {
+      sortPlansOrSaved.sort((a, b) => b.duration - a.duration);
+    } else if (sortMethod === "calories") {
+      sortPlansOrSaved.sort((a, b) => b.caloriesBurned - a.caloriesBurned);
+    } else if (sortMethod === "rating") {
+      sortPlansOrSaved.sort((a, b) => b.rating - a.rating);
+    }
+
+    return sortPlansOrSaved;
+  };
+
+  const sortedPlans = sortPlansAndSaved(plans);
+  const sortedSaved = sortPlansAndSaved(totalSaved);
+
   return (
     <LibraryContextAPI.Provider
       value={{
-        name,
         libraries,
         handleAddPlans,
         plans,
         handleAddToSaved,
         totalSaved,
         handleDelete,
+        handleSort,
+        sortedPlans,
+        sortedSaved,
       }}
     >
       {children}

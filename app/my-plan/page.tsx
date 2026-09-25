@@ -11,25 +11,25 @@ const ListedBooks = () => {
   );
   const context = useContext(LibraryContextAPI);
   if (!context) return <p>Context problem...</p>;
-  const { plans, totalSaved } = context;
+  const { sortedPlans, sortedSaved, handleSort } = context;
 
   // all about plans
-  const totalPlans = plans.length;
-  const totalPlansMinutes = plans.reduce(
+  const totalPlans = sortedPlans.length;
+  const totalPlansMinutes = sortedPlans.reduce(
     (accu, curr) => accu + curr.duration,
     0,
   );
-  const totalPlansCalories = plans.reduce(
+  const totalPlansCalories = sortedPlans.reduce(
     (accu, curr) => accu + curr.caloriesBurned,
     0,
   );
   // all about saved data
-  const totalSavedData = totalSaved.length;
-  const totalSavedMinutes = totalSaved.reduce(
+  const totalSavedData = sortedSaved.length;
+  const totalSavedMinutes = sortedSaved.reduce(
     (accu, curr) => accu + curr.duration,
     0,
   );
-  const totalSavedCalories = totalSaved.reduce(
+  const totalSavedCalories = sortedSaved.reduce(
     (accu, curr) => accu + curr.caloriesBurned,
     0,
   );
@@ -93,6 +93,9 @@ const ListedBooks = () => {
             <p className="text-white font-medium">Sort By</p>
 
             <select
+              onChange={(e) =>
+                handleSort(e.target.value as "duration" | "calories" | "rating")
+              }
               defaultValue="Duration"
               className="select bg-[#111827] border border-[#374151] text-white rounded-xl w-40 focus:outline-none focus:border-[#CCFF00]"
             >
@@ -107,13 +110,15 @@ const ListedBooks = () => {
       {/* today plan  */}
       <div className="grid grid-cols-1 gap-5 my-10">
         {activeTab === "todaysPlan" ? (
-          plans.length ? (
-            plans.map((plan) => <TodaysPlanCard key={plan.id} plan={plan} />)
+          sortedPlans.length ? (
+            sortedPlans.map((plan) => (
+              <TodaysPlanCard key={plan.id} plan={plan} />
+            ))
           ) : (
             <EmptyData />
           )
-        ) : totalSaved.length ? (
-          totalSaved.map((plan) => <SavedCard key={plan.id} plan={plan} />)
+        ) : sortedSaved.length ? (
+          sortedSaved.map((plan) => <SavedCard key={plan.id} plan={plan} />)
         ) : (
           <EmptyData />
         )}

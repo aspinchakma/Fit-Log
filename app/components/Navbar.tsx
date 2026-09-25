@@ -3,10 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContext } from "react";
 import LogoImage from "../assets/logo.png";
+import { LibraryContextAPI } from "../context/LibraryContextProvider";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const context = useContext(LibraryContextAPI);
+  if (!context) return <p>Context Problem...</p>;
+
+  const { plans, totalSaved } = context;
 
   return (
     <nav className="navbar border-b border-[#1c1f26] bg-[#0f1115] py-4">
@@ -119,7 +125,7 @@ const Navbar = () => {
                 <span className="hidden sm:block">Plan</span>
 
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C2F800] text-sm font-bold text-black">
-                  0
+                  {plans.length}
                 </span>
               </Link>
             </li>
@@ -132,7 +138,7 @@ const Navbar = () => {
                 <span className="hidden sm:block">Saved</span>
 
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#2D313B] text-sm">
-                  0
+                  {totalSaved.length}
                 </span>
               </Link>
             </li>

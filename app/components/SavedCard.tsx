@@ -55,7 +55,7 @@ const SavedCard = ({ plan }: { plan: Library }) => {
       <div className="flex w-full items-center gap-2 sm:w-auto sm:shrink-0 sm:gap-3">
         <Link
           href={`libraries/${id}`}
-          className="flex-1 rounded-full border border-[#374151] px-3 py-2 text-xs font-medium text-[#D1D5DB] transition-all duration-300 hover:border-[#CCFF00] hover:text-[#CCFF00] sm:flex-none sm:px-4 sm:text-sm cursor-pointer"
+          className="rounded-full border border-[#374151] px-3 py-2 text-xs font-medium text-[#D1D5DB] transition-all duration-300 hover:border-[#CCFF00] hover:text-[#CCFF00] sm:flex-none sm:px-4 sm:text-sm cursor-pointer"
         >
           View Details
         </Link>

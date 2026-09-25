@@ -9,7 +9,7 @@ const Footer = () => {
           <Image src={FooterLogo} className="w-9" alt="fit log footer logo" />
           <h2 className="font-bold font-oswald text-xl">FITLOG</h2>
         </div>
-        <p className="text-[#6B7280]">
+        <p className="text-[#6B7280] text-center sm:text-right">
           © {new Date().getFullYear()} FitLog — Workout Library. Train hard, log
           honest.
         </p>

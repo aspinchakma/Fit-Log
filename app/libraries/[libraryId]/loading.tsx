@@ -3,7 +3,7 @@ const loading = () => {
     <div className="py-5 md:py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div className="border-2 border-[#20242e] rounded-xl overflow-hidden bg-[#15171d]">
-          <div className="skeleton w-full h-[300px] md:h-[450px] rounded-none bg-[#232732]" />
+          <div className="skeleton w-full h-80 md:h-80 rounded-none bg-[#232732]" />
         </div>
         <div>
           <div className="skeleton h-12 w-3/4 bg-[#232732] mb-4" />

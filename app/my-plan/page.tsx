@@ -1,11 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import EmptyData from "../components/EmptyData";
+import SavedCard from "../components/SavedCard";
+import TodaysPlanCard from "../components/TodaysPlanCard";
+import { LibraryContextAPI } from "../context/LibraryContextProvider";
 const ListedBooks = () => {
   const [activeTab, setActiveTab] = useState<"todaysPlan" | "saved">(
     "todaysPlan",
   );
-  console.log(activeTab);
+  const context = useContext(LibraryContextAPI);
+  if (!context) return <p>Context problem...</p>;
+  const { plans } = context;
 
   return (
     <div>
@@ -36,9 +42,8 @@ const ListedBooks = () => {
         </div>
       </div>
 
-      {/* todays plan and saved section start here */}
       <div className="mt-6">
-        <div className="flex items-center  justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row md:flex-row items-center  justify-between">
           <div className="inline-flex items-center gap-1 p-1.5 rounded-2xl bg-[#1f242d] border border-[#2b303d] shadow-lg">
             <button
               onClick={() => setActiveTab("todaysPlan")}
@@ -75,6 +80,19 @@ const ListedBooks = () => {
             </select>
           </div>
         </div>
+      </div>
+
+      {/* today plan  */}
+      <div className="grid grid-cols-1 gap-5 my-10">
+        {activeTab === "todaysPlan" ? (
+          plans.length ? (
+            plans.map((plan) => <TodaysPlanCard key={plan.id} plan={plan} />)
+          ) : (
+            <EmptyData />
+          )
+        ) : (
+          <SavedCard />
+        )}
       </div>
     </div>
   );

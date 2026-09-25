@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 export interface Library {
   id: number;
   image: string;
@@ -20,6 +20,7 @@ export interface Library {
 interface ContextProps {
   name: string;
   libraries: Library[];
+  handleAddPlans: (plans: Library) => void;
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
@@ -33,8 +34,12 @@ const LibraryContextProvider = ({
   children: React.ReactNode;
   libraries: Library[];
 }) => {
+  const [plans, setPlans] = useState<Library[]>([]);
+  const handleAddPlans = (plan: Library): void => {
+    console.log(plan);
+  };
   return (
-    <LibraryContextAPI.Provider value={{ name, libraries }}>
+    <LibraryContextAPI.Provider value={{ name, libraries, handleAddPlans }}>
       {children}
     </LibraryContextAPI.Provider>
   );

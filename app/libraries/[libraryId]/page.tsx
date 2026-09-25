@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
   const { libraryId } = await params;
 
+  // loading test
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
+
   const response = await fetch(
     `https://api.abcz.workers.dev/api/fitlog/${libraryId}`,
   );
@@ -149,7 +152,7 @@ const Page = async ({ params }: { params: Promise<{ libraryId: string }> }) => {
               ))}
             </ol>
           </div>
-          <LibraryDetailsButton />
+          <LibraryDetailsButton library={library} />
         </div>
       </div>
     </div>

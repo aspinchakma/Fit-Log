@@ -11,7 +11,7 @@ const ListedBooks = () => {
   );
   const context = useContext(LibraryContextAPI);
   if (!context) return <p>Context problem...</p>;
-  const { sortedPlans, sortedSaved, handleSort } = context;
+  const { sortedPlans, sortedSaved, handleSort, sortMethod } = context;
 
   // all about plans
   const totalPlans = sortedPlans.length;
@@ -96,7 +96,7 @@ const ListedBooks = () => {
               onChange={(e) =>
                 handleSort(e.target.value as "duration" | "calories" | "rating")
               }
-              defaultValue="Duration"
+              defaultValue={sortMethod}
               className="select bg-[#111827] border border-[#374151] text-white rounded-xl w-40 focus:outline-none focus:border-[#CCFF00]"
             >
               <option value="duration">Duration</option>

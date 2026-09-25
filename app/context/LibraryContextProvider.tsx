@@ -28,6 +28,7 @@ interface ContextProps {
   handleSort: (sort: "duration" | "calories" | "rating") => void;
   sortedSaved: Library[];
   sortedPlans: Library[];
+  sortMethod: "duration" | "calories" | "rating";
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
@@ -175,7 +176,8 @@ const LibraryContextProvider = ({
 
   const sortedPlans = sortPlansAndSaved(plans);
   const sortedSaved = sortPlansAndSaved(totalSaved);
-
+  console.log("Sort:", sortMethod);
+  console.log(sortedPlans);
   return (
     <LibraryContextAPI.Provider
       value={{
@@ -188,6 +190,7 @@ const LibraryContextProvider = ({
         handleSort,
         sortedPlans,
         sortedSaved,
+        sortMethod,
       }}
     >
       {children}

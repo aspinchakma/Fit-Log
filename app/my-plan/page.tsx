@@ -1,9 +1,83 @@
-const page = () => {
+"use client";
+
+import { useState } from "react";
+const ListedBooks = () => {
+  const [activeTab, setActiveTab] = useState<"todaysPlan" | "saved">(
+    "todaysPlan",
+  );
+  console.log(activeTab);
+
   return (
     <div>
-      <h2>This is My Plan</h2>
+      <h2 className="text-2xl font-oswald lg:text-4xl md:text-4xl font-bold">
+        MY PLAN
+      </h2>
+      <p className="text-[#8A92A0] text-[17px] mb-6 mt-3">
+        Cap of five lifts for today. Finish them, then load more.
+      </p>
+      <div className="border-2 border-[#232732] rounded-xl p-4 lg:p-6 md:p-6 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-4 bg-[#13161d] ">
+        <div>
+          <h4 className="text-[#8A92A0] text-lg mb-2">Exercises</h4>
+          <p className="text-[#CCFF00] text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
+            2
+          </p>
+        </div>
+        <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
+          <h4 className="text-[#8A92A0] text-lg mb-2">Minutes</h4>
+          <p className=" text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
+            23
+          </p>
+        </div>
+        <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
+          <h4 className="text-[#8A92A0] text-lg mb-2 ">Calories</h4>
+          <p className="text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
+            190
+          </p>
+        </div>
+      </div>
+
+      {/* todays plan and saved section start here */}
+      <div className="mt-6">
+        <div className="flex items-center  justify-between">
+          <div className="inline-flex items-center gap-1 p-1.5 rounded-2xl bg-[#1f242d] border border-[#2b303d] shadow-lg">
+            <button
+              onClick={() => setActiveTab("todaysPlan")}
+              className={`px-5 py-2.5 rounded-xl transition-all duration-300 cursor-pointer ${
+                activeTab === "todaysPlan"
+                  ? "bg-[#2b303d] text-white shadow-md font-bold"
+                  : "text-[#8A92A0]"
+              }`}
+            >
+              Today&apos;s Plan
+            </button>
+
+            <button
+              onClick={() => setActiveTab("saved")}
+              className={`px-5 py-2.5 rounded-xl  transition-all duration-300 cursor-pointer ${
+                activeTab === "saved"
+                  ? "bg-[#2b303d] text-white shadow-md font-bold"
+                  : "text-[#8A92A0]"
+              }`}
+            >
+              Saved
+            </button>
+          </div>
+          <div className="flex items-center gap-3">
+            <p className="text-white font-medium">Sort By</p>
+
+            <select
+              defaultValue="Duration"
+              className="select bg-[#111827] border border-[#374151] text-white rounded-xl w-40 focus:outline-none focus:border-[#CCFF00]"
+            >
+              <option value="duration">Duration</option>
+              <option value="calories">Calories</option>
+              <option value="rating">Rating</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default page;
+export default ListedBooks;

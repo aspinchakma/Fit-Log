@@ -9,8 +9,6 @@ const Libraries = () => {
     return <p>Data Loading............</p>;
   }
   const { libraries } = context;
-
-  console.log(context?.libraries);
   return (
     <div className="mt-12">
       <h3 className="text-4xl font-bold font-oswald">THE LIBRARY</h3>

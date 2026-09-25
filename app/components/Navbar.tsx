@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import LogoImage from "../assets/logo.png";
 import { LibraryContextAPI } from "../context/LibraryContextProvider";
 
@@ -19,26 +20,17 @@ const Navbar = () => {
       <div className="w-full md:w-[85%] mx-auto  flex items-center justify-between">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+            <div
+              tabIndex={0}
+              role="button"
+              className=" text-white lg:hidden mr-2 md:hidden"
+            >
+              <GiHamburgerMenu size={26} />
             </div>
 
             <ul
               tabIndex={-1}
-              className="menu menu-sm dropdown-content z-10 mt-3 w-52 rounded-box bg-[#16191f] p-2 shadow"
+              className="menu menu-sm dropdown-content z-10 mt-3 w-52 rounded-box bg-[#16191f] p-2 shadow "
             >
               <li>
                 <Link
@@ -74,7 +66,7 @@ const Navbar = () => {
               alt="FitLog logo"
               width={140}
               height={50}
-              className="h-11 w-auto"
+              className="h-10 md:h-11 lg:h-11 w-auto"
             />
 
             <h2 className="text-2xl font-bold font-oswald">FITLOG</h2>
@@ -122,7 +114,7 @@ const Navbar = () => {
                 href="/my-plan"
                 className="flex items-center gap-2 font-medium text-[#D1D5DB]"
               >
-                <span className="hidden sm:block">Plan</span>
+                <span className="sm:block">Plan</span>
 
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C2F800] text-sm font-bold text-black">
                   {plans.length}
@@ -135,7 +127,7 @@ const Navbar = () => {
                 href="/my-plan"
                 className="flex items-center gap-2 font-medium text-[#D1D5DB]"
               >
-                <span className="hidden sm:block">Saved</span>
+                <span className=" sm:block">Saved</span>
 
                 <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#2D313B] text-sm">
                   {totalSaved.length}

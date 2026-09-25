@@ -3,7 +3,7 @@ import { IoHomeSharp } from "react-icons/io5";
 
 const NotFound = () => {
   return (
-    <div className="min-h-[400px] flex items-center justify-center px-6 ">
+    <div className="min-h-96 flex items-center justify-center px-6 ">
       <div className="w-full max-w-xl border-2 border-[#20242e] rounded-xl overflow-hidden bg-[#15171d] text-center">
         <div className="p-10 md:p-14">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#C2F800] flex items-center justify-center">

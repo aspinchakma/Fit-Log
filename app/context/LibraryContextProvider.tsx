@@ -24,6 +24,7 @@ interface ContextProps {
   handleAddPlans: (plan: Library) => void;
   plans: Library[];
   handleAddToSaved: (plan: Library) => void;
+  totalSaved: Library[];
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
@@ -104,7 +105,14 @@ const LibraryContextProvider = ({
   };
   return (
     <LibraryContextAPI.Provider
-      value={{ name, libraries, handleAddPlans, plans, handleAddToSaved }}
+      value={{
+        name,
+        libraries,
+        handleAddPlans,
+        plans,
+        handleAddToSaved,
+        totalSaved,
+      }}
     >
       {children}
     </LibraryContextAPI.Provider>

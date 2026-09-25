@@ -11,7 +11,9 @@ const ListedBooks = () => {
   );
   const context = useContext(LibraryContextAPI);
   if (!context) return <p>Context problem...</p>;
-  const { plans } = context;
+  const { plans, totalSaved } = context;
+
+  // all about plans
   const totalPlans = plans.length;
   const totalPlansMinutes = plans.reduce(
     (accu, curr) => accu + curr.duration,
@@ -21,7 +23,16 @@ const ListedBooks = () => {
     (accu, curr) => accu + curr.caloriesBurned,
     0,
   );
-
+  // all about saved data
+  const totalSavedData = totalSaved.length;
+  const totalSavedMinutes = totalSaved.reduce(
+    (accu, curr) => accu + curr.duration,
+    0,
+  );
+  const totalSavedCalories = totalSaved.reduce(
+    (accu, curr) => accu + curr.caloriesBurned,
+    0,
+  );
   return (
     <div>
       <h2 className="text-2xl font-oswald lg:text-4xl md:text-4xl font-bold">
@@ -34,19 +45,21 @@ const ListedBooks = () => {
         <div>
           <h4 className="text-[#8A92A0] text-lg mb-2">Exercises</h4>
           <p className="text-[#CCFF00] text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            {activeTab === "todaysPlan" ? totalPlans : "0"}
+            {activeTab === "todaysPlan" ? totalPlans : totalSavedData}
           </p>
         </div>
         <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
           <h4 className="text-[#8A92A0] text-lg mb-2">Minutes</h4>
           <p className=" text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            {activeTab === "todaysPlan" ? totalPlansMinutes : "0"}
+            {activeTab === "todaysPlan" ? totalPlansMinutes : totalSavedMinutes}
           </p>
         </div>
         <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
           <h4 className="text-[#8A92A0] text-lg mb-2 ">Calories</h4>
           <p className="text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            {activeTab === "todaysPlan" ? totalPlansCalories : "0"}
+            {activeTab === "todaysPlan"
+              ? totalPlansCalories
+              : totalSavedCalories}
           </p>
         </div>
       </div>
@@ -99,8 +112,10 @@ const ListedBooks = () => {
           ) : (
             <EmptyData />
           )
+        ) : totalSaved.length ? (
+          totalSaved.map((plan) => <SavedCard key={plan.id} plan={plan} />)
         ) : (
-          <SavedCard />
+          <EmptyData />
         )}
       </div>
     </div>

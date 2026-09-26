@@ -21,10 +21,10 @@ export const metadata: Metadata = {
   description: "FITLOG",
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
-  const libraries = await res.json();
-
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  // const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
+  // const libraries = await res.json();
+  // await new Promise((resolve) => setTimeout(resolve, 50000));
   return (
     <html
       lang="en"
@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${oswald.variable} h-full antialiased font-inter`}
     >
       <body className="min-h-full flex flex-col bg-black text-white">
-        <LibraryContextProvider libraries={libraries}>
+        <LibraryContextProvider>
           <Navbar />
           <main className="flex-1 w-[95%] mx-auto lg:w-[85%] md:w-[85%]  my-10">
             {children}

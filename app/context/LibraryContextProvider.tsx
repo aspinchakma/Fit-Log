@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 export interface Library {
   id: number;
@@ -31,6 +31,7 @@ interface ContextProps {
   sortMethod: "duration" | "calories" | "rating";
   completedPlans: number[];
   handleComplete: (id: number) => void;
+  loading: boolean;
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
@@ -38,17 +39,41 @@ export const LibraryContextAPI = createContext<ContextProps | undefined>(
 
 const LibraryContextProvider = ({
   children,
-  libraries,
 }: {
   children: React.ReactNode;
-  libraries: Library[];
 }) => {
+  const [libraries, setLibraries] = useState<Library[]>([]);
+  const [loading, setLoading] = useState(true);
   const [plans, setPlans] = useState<Library[]>([]);
   const [totalSaved, setTotalSaved] = useState<Library[]>([]);
   const [sortMethod, setSortMethod] = useState<
     "duration" | "calories" | "rating"
   >("duration");
   const [completedPlans, setCompletedPlans] = useState<number[]>([]);
+
+  // data loading
+  useEffect(() => {
+    const fetchLibraries = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 50000));
+        const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch libraries");
+        }
+
+        const data: Library[] = await res.json();
+
+        setLibraries(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLibraries();
+  }, []);
 
   // handle add plans
   const handleAddPlans = (plan: Library): void => {
@@ -196,8 +221,6 @@ const LibraryContextProvider = ({
 
   const sortedPlans = sortPlansAndSaved(plans);
   const sortedSaved = sortPlansAndSaved(totalSaved);
-  console.log("Sort:", sortMethod);
-  console.log(sortedPlans);
   return (
     <LibraryContextAPI.Provider
       value={{
@@ -213,6 +236,7 @@ const LibraryContextProvider = ({
         sortMethod,
         completedPlans,
         handleComplete,
+        loading,
       }}
     >
       {children}

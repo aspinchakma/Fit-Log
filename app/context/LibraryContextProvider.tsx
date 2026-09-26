@@ -29,6 +29,8 @@ interface ContextProps {
   sortedSaved: Library[];
   sortedPlans: Library[];
   sortMethod: "duration" | "calories" | "rating";
+  completedPlans: number[];
+  handleComplete: (id: number) => void;
 }
 export const LibraryContextAPI = createContext<ContextProps | undefined>(
   undefined,
@@ -46,6 +48,7 @@ const LibraryContextProvider = ({
   const [sortMethod, setSortMethod] = useState<
     "duration" | "calories" | "rating"
   >("duration");
+  const [completedPlans, setCompletedPlans] = useState<number[]>([]);
 
   // handle add plans
   const handleAddPlans = (plan: Library): void => {
@@ -126,7 +129,10 @@ const LibraryContextProvider = ({
       });
     } else if (type === "plans") {
       const final = plans.filter((pln) => pln.id !== plan.id);
+
       setPlans(final);
+
+      setCompletedPlans((prev) => prev.filter((id) => id !== plan.id));
       toast.success(`Successfully Deleted, ${plan.name}`, {
         position: "bottom-right",
         autoClose: 5000,
@@ -174,6 +180,20 @@ const LibraryContextProvider = ({
     return sortPlansOrSaved;
   };
 
+  const handleComplete = (id: number) => {
+    setCompletedPlans((prev) => {
+      if (prev.includes(id)) return prev;
+      return [...prev, id];
+    });
+
+    toast.success("Task completed successfully!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+
   const sortedPlans = sortPlansAndSaved(plans);
   const sortedSaved = sortPlansAndSaved(totalSaved);
   console.log("Sort:", sortMethod);
@@ -191,6 +211,8 @@ const LibraryContextProvider = ({
         sortedPlans,
         sortedSaved,
         sortMethod,
+        completedPlans,
+        handleComplete,
       }}
     >
       {children}

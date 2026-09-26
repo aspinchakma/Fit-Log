@@ -6,7 +6,8 @@ import { Library, LibraryContextAPI } from "../context/LibraryContextProvider";
 const TotalPlansCardButtons = ({ plan }: { plan: Library }) => {
   const context = useContext(LibraryContextAPI);
   if (!context) return <p>Context Problem</p>;
-  const { handleDelete } = context;
+  const { handleDelete, completedPlans, handleComplete } = context;
+  const isDone = completedPlans.includes(plan.id);
   return (
     <div className="flex w-full items-center gap-2 sm:w-auto sm:shrink-0 sm:gap-3">
       <Link
@@ -17,11 +18,22 @@ const TotalPlansCardButtons = ({ plan }: { plan: Library }) => {
       </Link>
 
       <button
-        onClick={() => handleDelete("done", plan)}
-        className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[#CCFF00] bg-[#CCFF00] px-3 py-2 text-xs font-bold text-black transition-all duration-300 hover:bg-transparent hover:text-[#CCFF00] sm:flex-none sm:px-4 sm:text-sm cursor-pointer"
+        onClick={() => handleComplete(plan.id)}
+        disabled={isDone}
+        className={`
+    flex flex-1 items-center justify-center gap-2
+    rounded-full border px-3 py-2 text-xs font-bold
+    transition-all duration-300
+    ${
+      isDone
+        ? "border-green-500 bg-green-500 text-black cursor-not-allowed"
+        : "border-[#CCFF00] bg-[#CCFF00] text-black hover:bg-transparent hover:text-[#CCFF00]"
+    }
+  `}
       >
         <FaCheck size={13} />
-        <span>Mark as Done</span>
+
+        <span>{isDone ? "Completed" : "Mark as Done"}</span>
       </button>
 
       <button

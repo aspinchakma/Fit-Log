@@ -18,22 +18,30 @@ const TotalPlansCardButtons = ({ plan }: { plan: Library }) => {
       </Link>
 
       <button
+        type="button"
         onClick={() => handleComplete(plan.id)}
         disabled={isDone}
         className={`
     flex flex-1 items-center justify-center gap-2
-    rounded-full border px-3 py-2 text-xs font-bold
+    rounded-full border-2 px-6 py-2
+    text-sm font-semibold
     transition-all duration-300
     ${
       isDone
-        ? "border-green-500 bg-green-500 text-black cursor-not-allowed"
-        : "border-[#CCFF00] bg-[#CCFF00] text-black hover:bg-transparent hover:text-[#CCFF00]"
+        ? "border-[#CCFF00] bg-[#CCFF00] text-black cursor-not-allowed"
+        : "border-[#374151] text-white cursor-pointer hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black"
     }
   `}
       >
-        <FaCheck size={13} />
-
-        <span>{isDone ? "Completed" : "Mark as Done"}</span>
+        <span>
+          {isDone ? (
+            <span className="flex items-center gap-1">
+              <FaCheck /> Completed
+            </span>
+          ) : (
+            "Mark as Done"
+          )}
+        </span>
       </button>
 
       <button

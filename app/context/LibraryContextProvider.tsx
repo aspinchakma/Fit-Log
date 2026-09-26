@@ -55,7 +55,8 @@ const LibraryContextProvider = ({
   useEffect(() => {
     const fetchLibraries = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 50000));
+        // this line for testing
+        // await new Promise((resolve) => setTimeout(resolve, 50000));
         const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
 
         if (!res.ok) {

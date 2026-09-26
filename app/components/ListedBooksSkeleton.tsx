@@ -1,43 +1,16 @@
 "use client";
 
 import { useContext, useState } from "react";
-import EmptyData from "../components/EmptyData";
-import ListedBooksSkeleton from "../components/ListedBooksSkeleton";
-import SavedCard from "../components/SavedCard";
-import TodaysPlanCard from "../components/TodaysPlanCard";
 import { LibraryContextAPI } from "../context/LibraryContextProvider";
-const ListedBooks = () => {
+import ListedPlanSkeleton from "./ListedPlanSkeleton";
+
+const ListedBooksSkeleton = () => {
   const [activeTab, setActiveTab] = useState<"todaysPlan" | "saved">(
     "todaysPlan",
   );
   const context = useContext(LibraryContextAPI);
   if (!context) return <p>Context problem...</p>;
-  const { sortedPlans, sortedSaved, handleSort, sortMethod, loading } = context;
-
-  if (loading) {
-    return <ListedBooksSkeleton />;
-  }
-
-  // all about plans
-  const totalPlans = sortedPlans.length;
-  const totalPlansMinutes = sortedPlans.reduce(
-    (accu, curr) => accu + curr.duration,
-    0,
-  );
-  const totalPlansCalories = sortedPlans.reduce(
-    (accu, curr) => accu + curr.caloriesBurned,
-    0,
-  );
-  // all about saved data
-  const totalSavedData = sortedSaved.length;
-  const totalSavedMinutes = sortedSaved.reduce(
-    (accu, curr) => accu + curr.duration,
-    0,
-  );
-  const totalSavedCalories = sortedSaved.reduce(
-    (accu, curr) => accu + curr.caloriesBurned,
-    0,
-  );
+  const { handleSort, sortMethod } = context;
   return (
     <div>
       <h2 className="text-2xl font-oswald lg:text-4xl md:text-4xl font-bold">
@@ -46,26 +19,19 @@ const ListedBooks = () => {
       <p className="text-[#8A92A0] text-[17px] mb-6 mt-3">
         Cap of five lifts for today. Finish them, then load more.
       </p>
+
       <div className="border-2 border-[#232732] rounded-xl p-4 lg:p-6 md:p-6 grid grid-cols-3 lg:grid-cols-3 md:grid-cols-3 gap-4 bg-[#13161d] ">
         <div>
           <h4 className="text-[#8A92A0] text-lg mb-2">Exercises</h4>
-          <p className="text-[#CCFF00] text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            {activeTab === "todaysPlan" ? totalPlans : totalSavedData}
-          </p>
+          <div className="skeleton h-12 w-16 lg:h-16 lg:w-24 rounded"></div>
         </div>
         <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
           <h4 className="text-[#8A92A0] text-lg mb-2">Minutes</h4>
-          <p className=" text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            {activeTab === "todaysPlan" ? totalPlansMinutes : totalSavedMinutes}
-          </p>
+          <div className="skeleton h-12 w-16 lg:h-16 lg:w-24 rounded"></div>
         </div>
         <div className="lg:border-l-2 md:border-l-2 lg:pl-6 md:pl-6 lg:border-l-[#232732] md:border-l-[#232732]">
           <h4 className="text-[#8A92A0] text-lg mb-2 ">Calories</h4>
-          <p className="text-3xl lg:text-6xl md:text-6xl font-bold font-oswald">
-            {activeTab === "todaysPlan"
-              ? totalPlansCalories
-              : totalSavedCalories}
-          </p>
+          <div className="skeleton h-12 w-16 lg:h-16 lg:w-24 rounded"></div>
         </div>
       </div>
 
@@ -112,24 +78,13 @@ const ListedBooks = () => {
         </div>
       </div>
 
-      {/* today plan  */}
       <div className="grid grid-cols-1 gap-5 my-10">
-        {activeTab === "todaysPlan" ? (
-          sortedPlans.length ? (
-            sortedPlans.map((plan) => (
-              <TodaysPlanCard key={plan.id} plan={plan} />
-            ))
-          ) : (
-            <EmptyData />
-          )
-        ) : sortedSaved.length ? (
-          sortedSaved.map((plan) => <SavedCard key={plan.id} plan={plan} />)
-        ) : (
-          <EmptyData />
-        )}
+        <ListedPlanSkeleton />
+        <ListedPlanSkeleton />
+        <ListedPlanSkeleton />
       </div>
     </div>
   );
 };
 
-export default ListedBooks;
+export default ListedBooksSkeleton;

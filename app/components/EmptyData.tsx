@@ -12,7 +12,7 @@ const EmptyData = () => {
       </p>
 
       <Link
-        href={`/`}
+        href={`/#libraries`}
         className="mt-5 rounded-full bg-[#CCFF00] px-5 py-2 text-sm font-bold text-black transition-all duration-500 border-2 border-[#CCFF00] hover:bg-transparent hover:text-[#CCFF00] "
       >
         Go to workouts

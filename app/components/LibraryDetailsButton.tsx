@@ -1,30 +1,65 @@
 "use client";
+
 import { useContext } from "react";
-import { FaRegBookmark, FaRegCalendarPlus } from "react-icons/fa";
+import { FaCheck, FaRegBookmark, FaRegCalendarPlus } from "react-icons/fa";
+
 import { Library, LibraryContextAPI } from "../context/LibraryContextProvider";
 
 const LibraryDetailsButton = ({ library }: { library: Library }) => {
   const context = useContext(LibraryContextAPI);
+
   if (!context) {
-    return <p>loading...</p>;
+    return <p>Loading...</p>;
   }
-  const { handleAddPlans, handleAddToSaved } = context;
+
+  const { handleAddPlans, handleAddToSaved, sortedPlans, sortedSaved } =
+    context;
+
+  const isAlreadyAdded = sortedPlans.some((plan) => plan.id === library.id);
+  const isAlreadySaved = sortedSaved.some((plan) => plan.id === library.id);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
+    <div className="flex flex-col sm:flex-row items-center gap-3 mt-5">
       <button
+        type="button"
         onClick={() => handleAddPlans(library)}
-        className="text-[14px] font-semibold flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-[#374151] cursor-pointer hover:bg-[#CCFF00] hover:text-black transition duration-700 w-full sm:w-fit justify-center"
+        className={`
+          flex w-full sm:w-auto items-center justify-center gap-2
+          rounded-xl border-2 px-6 py-3
+          text-sm font-semibold
+          transition-all duration-300
+          ${
+            isAlreadyAdded
+              ? "border-[#CCFF00] bg-[#CCFF00] text-black cursor-not-allowed"
+              : "border-[#374151] text-white cursor-pointer hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black"
+          }
+        `}
       >
-        <FaRegCalendarPlus />
-        <span> Add to today&apos;s plan</span>
+        {isAlreadyAdded ? <FaCheck /> : <FaRegCalendarPlus />}
+
+        <span>
+          {isAlreadyAdded ? "Already in today's plan" : "Add to today's plan"}
+        </span>
       </button>
+
       <button
+        type="button"
         onClick={() => handleAddToSaved(library)}
-        className="text-[14px] font-semibold flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-[#374151] cursor-pointer hover:bg-[#CCFF00] hover:text-black transition duration-700 w-full sm:w-fit justify-center"
+        className={`
+    flex w-full sm:w-auto items-center justify-center gap-2
+    rounded-xl border-2 px-6 py-3
+    text-sm font-semibold
+    transition-all duration-300
+    ${
+      isAlreadySaved
+        ? "border-[#CCFF00] bg-[#CCFF00] text-black cursor-not-allowed"
+        : "border-[#374151] text-white cursor-pointer hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black"
+    }
+  `}
       >
-        <FaRegBookmark />
-        <span> Save for later</span>
+        {isAlreadySaved ? <FaCheck /> : <FaRegBookmark />}
+
+        <span>{isAlreadySaved ? "Already saved" : "Save for later"}</span>
       </button>
     </div>
   );
